@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>The GreenyFarm</title>
+    <meta name="description" content="The GreenFarm for life">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- an example of using css alongside bootstrap -->
+    <style>
+        /* to place border around items in the shopping basket - orders.html */
+        .my-row {
+            border: 1px solid grey;
+        }
+
+        .jumbotron {
+            min-height: 600px;
+        }
+}
+    </style>
+</head>
+
+<body>
+    <!-- putting header inside container will prevent full width navbar -->
+    <div class="text-center text-white font-italic" style="background-color: rgb(100, 99, 99);">Ahoy! - We are among the top international agricultural solution providers - Call us: +61 123456789</div>
+    <header>
+
+        <!--navbar creates a navigation bar -->
+        <!-- Colours https://getbootstrap.com/docs/4.0/utilities/colors/ -->
+
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkgreen;">
+
+            <a class="navbar-brand text-light font-weight-bolder" href="{{ url_for('main.index') }}">
+                <img src="{{url_for('static', filename='img/logo.jpg')}}" width="35" height="35" class="d-inline-block align-top"
+                    alt="Site Logo" loading="lazy">
+                THE GREENYFARM
+            </a>
+
+            <!-- create a button for collapsing the menu -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <!-- individual menu item-->
+                <a class="nav-item nav-link text-light active" href="{{url_for('main.about')}}">About Us</a>
+
+                <!-- individual menu item-->
+                <a class="nav-item nav-link text-light" href="{{url_for('main.index', _anchor='products_anchor')}}">Our products</a>
+
+                <!-- individual menu item-->
+                <a class="nav-item nav-link text-light" href="{{url_for('main.order')}}">Basket</a>
+
+                <!-- individual menu item-->
+                <!-- this link will fail but good test of the 404 handler -->
+                <a class="nav-item nav-link text-light" href="discounts.html">Offers</a>
+
+                <!-- right aligned menu items thanks to ml-auto -->
+                <ul class="nav navbar-nav ml-auto">                   
+                    <li class="nav-item">
+                        <!-- search box -->
+                        <form class="form-inline my-2 my-lg-0 ml-5" action ="{{url_for('main.search')}}">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search">
+                            <button class="btn btn-outline-black btn btn-secondary btn-s my-0 ml-1"
+                                type="submit">Search</button>
+                        </form>
+                    </li>
+                </ul>
+
+        </nav>
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %} 
+
+        {% block head %}{% endblock %}
+
+    </header>
+
+
+    <!-- main page content goes in container -->
+    <div class="container-fluid" style="padding-bottom: 20px;">
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+    </div>
+
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="text-center text-white" style="background-color: rgb(100, 99, 99);">
+            <p>Copyright &copy; sem5D 2020 IFN557</p>
+        </div>
+    </footer>
+    <!-- Footer -->
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

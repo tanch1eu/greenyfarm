@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- display tours for the specific city -->
+<section>
+
+    <div class="text-dark text-center" style="padding-top: 20px;">
+        <div>
+            <p class="h3 text-dark mb-4">Select a product from below</p>
+        </div>
+    </div>
+
+    <div class="card-columns">
+        <!-- each item is a bootstrap card -->
+        {% for item in items%}
+        <div class="card">
+            <img class="card-img-top" src="{{url_for('static', filename='img/'+item.image)}}" style="max-width: 150px;" alt="product image">
+            <div class="card-body">
+                <h4 class="card-title">{{item.name}}</h4>
+                <p class="card-text">{{item.description}}</p>
+                <p class="card-text" style="color: rgb(156, 0, 0);">$AUD{{item.price}}</p>
+            </div>
+            <div class="card-footer"><a href="{{ url_for('main.order', item_id=item.id) }}" class="btn btn-primary">Add to Basket</a></div>
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+{% endblock %}
+
